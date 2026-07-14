@@ -1,0 +1,13 @@
+{
+  "name": "playwright-e2e-training",
+  "version": "1.0.0",
+  "description": "playwright e2e automation with MCP and agent",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Mark Anthony Mejica",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1"
+  }
+}
