@@ -1,0 +1,6 @@
+1. Create a new file named youtubetest.spec.ts under my demo folder
+2. And capture the flow as below
+ - navigate to site "youtube.com"
+ - search for "Section Y - NPS Music"
+ - click on play button
+ - and play it wait until it finish  before closing the test

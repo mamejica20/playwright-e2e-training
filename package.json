@@ -3,11 +3,21 @@
   "version": "1.0.0",
   "description": "playwright e2e automation with MCP and agent",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "demo": "npx playwright test --config=config/local.playwright.config.ts tests/demo/mytest.spec.ts --headed"
+  },
   "author": "Mark Anthony Mejica",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
-    "@types/node": "^26.1.1"
+    "@types/node": "^26.1.1",
+    "allure-playwright": "^3.10.2",
+    "chalk": "^6.0.0",
+    "csv-parse": "^7.0.1",
+    "dotenv": "^17.4.2",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@playwright/mcp": "^0.0.78"
   }
 }

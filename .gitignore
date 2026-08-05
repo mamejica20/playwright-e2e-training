@@ -12,3 +12,4 @@ logs/
 allure-results
 example.*
 *.log
+allure-results/
