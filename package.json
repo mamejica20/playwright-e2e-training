@@ -4,7 +4,7 @@
   "description": "playwright e2e automation with MCP and agent",
   "main": "index.js",
   "scripts": {
-    "demo": "npx playwright test --config=config/local.playwright.config.ts tests/demo/mytest.spec.ts --headed"
+    "demo": "npx playwright test --config=config/local.playwright.config.ts tests/demo/mytest.spec.ts"
   },
   "author": "Mark Anthony Mejica",
   "license": "ISC",
