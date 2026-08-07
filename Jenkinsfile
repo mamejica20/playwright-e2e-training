@@ -1,16 +1,23 @@
-pipeline{
+pipeline {
     agent any
-    tools{
+
+    environment {
+        MAIL_TO = 'markanthonymejica.20@gmail.com, shamay.fernandez24@gmail.com'
+    }
+
+    tools {
         nodejs "node24"
         allure "allure"
     }
-    options{
+
+    options {
         timeout(time: 30, unit: 'MINUTES')
     }
-    stages{
-        stage('Install Dependencies'){
-            steps{
-                script{
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
                     sh '''
                         set -eu
                         npm ci
@@ -19,15 +26,17 @@ pipeline{
                 }
             }
         }
-        stage('Run Tests'){
-            steps{
-                script{
+
+        stage('Run Tests') {
+            steps {
+                script {
                     sh 'npm run demo'
                 }
             }
-            post{
-                always{
-                    script{
+
+            post {
+                always {
+                    script {
                         allure([
                             includeProperties: false,
                             jdk: '',
@@ -40,32 +49,39 @@ pipeline{
             }
         }
     }
-    post{
-        always{
-             emailext(
-                subject: "QA Test Report - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """
-                    <h2>Test Execution Completed</h2>
 
-                    <p><b>Job:</b> ${env.JOB_NAME}</p>
-                    <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
-                    <p><b>Status:</b> ${currentBuild.currentResult}</p>
+    post {
+        always {
+            script {
+                if (env.MAIL_TO?.trim()) {
+                    emailext(
+                        subject: "QA Test Report - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                        body: """
+                            <h2>Test Execution Completed</h2>
 
-                    <p>
-                        <a href="${env.BUILD_URL}allure/">
-                            Open Allure Report
-                        </a>
-                    </p>
+                            <p><b>Job:</b> ${env.JOB_NAME}</p>
+                            <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
+                            <p><b>Status:</b> ${currentBuild.currentResult}</p>
 
-                    <p>
-                        <a href="${env.BUILD_URL}">
-                            Open Jenkins Build
-                        </a>
-                    </p>
-                """,
-                to: 'MarkAnthonyMejica.20@gmail.com',
-                mimeType: 'text/html'
-            )
+                            <p>
+                                <a href="${env.BUILD_URL}allure/">
+                                    Open Allure Report
+                                </a>
+                            </p>
+
+                            <p>
+                                <a href="${env.BUILD_URL}">
+                                    Open Jenkins Build
+                                </a>
+                            </p>
+                        """,
+                        to: env.MAIL_TO,
+                        mimeType: 'text/html'
+                    )
+                } else {
+                    echo 'No recipient configured. Skipping email notification.'
+                }
+            }
         }
     }
 }
