@@ -14,7 +14,7 @@ pipeline{
                     sh '''
                         set -eu
                         npm ci
-                        npm install playwright
+                        npx playwright install --with-deps
                     '''
                 }
             }
