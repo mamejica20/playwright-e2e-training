@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        MAIL_TO = 'markanthonymejica.20@gmail.com, shamay.fernandez24@gmail.com'
+        MAIL_TO = 'markanthonymejica.20@gmail.com,juliuscesarjunio3@gmail.com,adilyn489@gmail.com'
     }
 
     tools {
